@@ -1,0 +1,580 @@
+{
+  "contractName": "Sample",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "_a",
+          "type": "int256"
+        },
+        {
+          "internalType": "int256",
+          "name": "_b",
+          "type": "int256"
+        }
+      ],
+      "name": "Sum",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getSum",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_a\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"_b\",\"type\":\"int256\"}],\"name\":\"Sum\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getSum\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/msk/Desktop/479/Truffle/contracts/Sample.sol\":\"Sample\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/msk/Desktop/479/Truffle/contracts/Sample.sol\":{\"keccak256\":\"0xce2c450588c3252c619b43222f042ea1b01aacb6a7d20a9c56ef0fc9c46a7c76\",\"urls\":[\"bzz-raw://05c34884b46527448912854d190fe30e2f47eee8c6a24150dad76bfb8d64bf87\",\"dweb:/ipfs/QmNqc7QTCxgCCemSmE7T6pV1foUuQGtt6EvuUbdp2h3N9k\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ca8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c8063569c5f6d146037578063eb638f12146053575b600080fd5b603d6088565b6040518082815260200191505060405180910390f35b608660048036036040811015606757600080fd5b8101908080359060200190929190803590602001909291905050506091565b005b60008054905090565b505056fea265627a7a72315820e0969544487e31279f7215c909c556e5657e5d48f0dc867af9b07f6e4c90c85a64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c8063569c5f6d146037578063eb638f12146053575b600080fd5b603d6088565b6040518082815260200191505060405180910390f35b608660048036036040811015606757600080fd5b8101908080359060200190929190803590602001909291905050506091565b005b60008054905090565b505056fea265627a7a72315820e0969544487e31279f7215c909c556e5657e5d48f0dc867af9b07f6e4c90c85a64736f6c63430005100032",
+  "sourceMap": "26:152:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:152:0;;;;;;;",
+  "deployedSourceMap": "26:152:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:152:0;;;;;;;;;;;;;;;;;;;;;;;;107:69;;;:::i;:::-;;;;;;;;;;;;;;;;;;;60:42;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;60:42:0;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;107:69;145:3;166;;159:10;;107:69;:::o;60:42::-;;;:::o",
+  "source": "pragma solidity ^0.5.16;\n\ncontract Sample{\n    int sum;\n    function Sum(int _a,int _b) public{\n\n    }\n    function getSum() public view returns(int){\n        return sum;\n    }\n}",
+  "sourcePath": "/home/msk/Desktop/479/Truffle/contracts/Sample.sol",
+  "ast": {
+    "absolutePath": "/home/msk/Desktop/479/Truffle/contracts/Sample.sol",
+    "exportedSymbols": {
+      "Sample": [
+        20
+      ]
+    },
+    "id": 21,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".16"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 20,
+        "linearizedBaseContracts": [
+          20
+        ],
+        "name": "Sample",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "sum",
+            "nodeType": "VariableDeclaration",
+            "scope": 20,
+            "src": "47:7:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_int256",
+              "typeString": "int256"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "int",
+              "nodeType": "ElementaryTypeName",
+              "src": "47:3:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_int256",
+                "typeString": "int256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 10,
+              "nodeType": "Block",
+              "src": "94:8:0",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 11,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "Sum",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 8,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5,
+                  "name": "_a",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11,
+                  "src": "73:6:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 4,
+                    "name": "int",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "73:3:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7,
+                  "name": "_b",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11,
+                  "src": "80:6:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 6,
+                    "name": "int",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "80:3:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "72:15:0"
+            },
+            "returnParameters": {
+              "id": 9,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "94:0:0"
+            },
+            "scope": 20,
+            "src": "60:42:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 18,
+              "nodeType": "Block",
+              "src": "149:27:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 16,
+                    "name": "sum",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 3,
+                    "src": "166:3:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 15,
+                  "id": 17,
+                  "nodeType": "Return",
+                  "src": "159:10:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 19,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getSum",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "122:2:0"
+            },
+            "returnParameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 14,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 19,
+                  "src": "145:3:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 13,
+                    "name": "int",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "145:3:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "144:5:0"
+            },
+            "scope": 20,
+            "src": "107:69:0",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 21,
+        "src": "26:152:0"
+      }
+    ],
+    "src": "0:178:0"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/home/msk/Desktop/479/Truffle/contracts/Sample.sol",
+      "exportedSymbols": {
+        "Sample": [
+          20
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".16"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            20
+          ],
+          "name": "Sample",
+          "scope": 21
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "sum",
+              "scope": 20,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "int256",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "int",
+                  "type": "int256"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "47:3:0"
+              }
+            ],
+            "id": 3,
+            "name": "VariableDeclaration",
+            "src": "47:7:0"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "Sum",
+              "scope": 20,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_a",
+                      "scope": 11,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int",
+                          "type": "int256"
+                        },
+                        "id": 4,
+                        "name": "ElementaryTypeName",
+                        "src": "73:3:0"
+                      }
+                    ],
+                    "id": 5,
+                    "name": "VariableDeclaration",
+                    "src": "73:6:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_b",
+                      "scope": 11,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int",
+                          "type": "int256"
+                        },
+                        "id": 6,
+                        "name": "ElementaryTypeName",
+                        "src": "80:3:0"
+                      }
+                    ],
+                    "id": 7,
+                    "name": "VariableDeclaration",
+                    "src": "80:6:0"
+                  }
+                ],
+                "id": 8,
+                "name": "ParameterList",
+                "src": "72:15:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 9,
+                "name": "ParameterList",
+                "src": "94:0:0"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 10,
+                "name": "Block",
+                "src": "94:8:0"
+              }
+            ],
+            "id": 11,
+            "name": "FunctionDefinition",
+            "src": "60:42:0"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "getSum",
+              "scope": 20,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 12,
+                "name": "ParameterList",
+                "src": "122:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 19,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int",
+                          "type": "int256"
+                        },
+                        "id": 13,
+                        "name": "ElementaryTypeName",
+                        "src": "145:3:0"
+                      }
+                    ],
+                    "id": 14,
+                    "name": "VariableDeclaration",
+                    "src": "145:3:0"
+                  }
+                ],
+                "id": 15,
+                "name": "ParameterList",
+                "src": "144:5:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 15
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 3,
+                          "type": "int256",
+                          "value": "sum"
+                        },
+                        "id": 16,
+                        "name": "Identifier",
+                        "src": "166:3:0"
+                      }
+                    ],
+                    "id": 17,
+                    "name": "Return",
+                    "src": "159:10:0"
+                  }
+                ],
+                "id": 18,
+                "name": "Block",
+                "src": "149:27:0"
+              }
+            ],
+            "id": 19,
+            "name": "FunctionDefinition",
+            "src": "107:69:0"
+          }
+        ],
+        "id": 20,
+        "name": "ContractDefinition",
+        "src": "26:152:0"
+      }
+    ],
+    "id": 21,
+    "name": "SourceUnit",
+    "src": "0:178:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x206b8b272B4bbAE00689bFAe34273C656f58FB1e",
+      "transactionHash": "0xffb32be01d6c340f5cca909c7f440cf2588a2e95c803a7ebfc923181bfc47feb"
+    },
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x4bD9F0A941eE32D9F3E6F9Ce88cc0d8eBE9378b5",
+      "transactionHash": "0xbf2764dfd412c2e038274f01ae1d1ce1ca1c22f970487680e2967f1c6b426427"
+    }
+  },
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-03-17T22:23:26.260Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
