@@ -4,7 +4,6 @@ const verify = require("./verifyLogin");
 const { studentValidation ,updateStudentValidation} = require("./validation/ContractValidation");
 const { addStudent,deleteStudent,getStudent,updateStudent } = require("../services/ContractService");
 
-//verify eklenecek
 router.post("/addStudent", verify, (req, res) => {
   //Validation part
   let { error } = studentValidation(req.body);

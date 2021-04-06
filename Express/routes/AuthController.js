@@ -1,12 +1,11 @@
 const router = require("express").Router();
+const verify = require("./verifyLogin");
 
 const {
   registerValidation,
   loginValidation,
 } = require("./validation/AuthValidation");
 const { register, login } = require("../services/AuthService");
-
-const verify = require("./verifyLogin");
 
 router.post("/register", verify, async (req, res) => {
   //Validation part
