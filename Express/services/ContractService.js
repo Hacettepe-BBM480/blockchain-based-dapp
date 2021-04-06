@@ -1,11 +1,11 @@
-const GetContract = require("../contract/Web3Config");
+const ContractFactory = require("../contract/Web3Config");
 const uniquid = require("uniquid");
 const OwnerPublicKey = process.env.OWNER_PUBLIC_KEY;
 
 
 
 const addStudent  = (studentNo) => {
-  GetContract()
+  ContractFactory.getInstance()
     .then(async (contract) => {
       await contract.methods.addStudent(uniquid(),studentNo).send({ from: OwnerPublicKey })
     })
@@ -15,7 +15,7 @@ const addStudent  = (studentNo) => {
 }
 
 const deleteStudent = (studentNo) => {
-    GetContract()
+  ContractFactory.getInstance()
     .then(async (contract) => {
       await contract.methods.deleteStudent(studentNo).send({ from: OwnerPublicKey })
     })
@@ -25,7 +25,7 @@ const deleteStudent = (studentNo) => {
 }
 
 const updateStudent = (studentId,studentNo) => {
-    GetContract()
+  ContractFactory.getInstance()
     .then(async (contract) => {
       await contract.methods.updateStudent(studentId,studentNo).send({ from: OwnerPublicKey })
     })
@@ -36,7 +36,7 @@ const updateStudent = (studentId,studentNo) => {
 
 
 const getStudent = async (studentNo) => {
-    let contract = await GetContract()
+    let contract = await   ContractFactory.getInstance();
     let data = await contract.methods.getStudent(studentNo).call();
     return data;
 }
