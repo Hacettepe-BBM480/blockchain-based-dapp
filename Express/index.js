@@ -6,8 +6,8 @@ const dotenv = require("dotenv");
 
 
 //Import Routes
-const authRoute = require("./routes/auth");
-const contractRoute = require("./routes/smartContract");
+const authRoute = require("./routes/AuthController");
+const contractRoute = require("./routes/ContractController");
 
 const jsonParser = bodyParser.json()
 
