@@ -3,6 +3,10 @@ var bodyParser = require('body-parser')
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+var cors = require('cors')
+
+app.use(cors())
+
 
 
 //Import Routes

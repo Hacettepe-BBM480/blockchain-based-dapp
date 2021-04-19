@@ -41,4 +41,22 @@ const getStudent = async (studentNo) => {
     return data;
 }
 
-module.exports = {addStudent,deleteStudent,getStudent,updateStudent}
+
+const uploadFile = async(addedfile,_name, description, studentId)=>{
+
+  ContractFactory.getInstance()
+        .then(async (contract) => {
+            await contract.methods.uploadFile(uniquid(), addedfile[0].hash, addedfile[0].size,'docx',_name,description,studentId).send({ from: OwnerPublicKey });
+        })
+        .catch((error) => {
+            return error;
+        });
+}
+
+const getFile = async(studentNo)=>{
+  let contract = await ContractFactory.getInstance();
+  let data = await contract.methods.getFilesOfStudent(studentNo).call();
+  return data;
+}
+
+module.exports = {addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile}

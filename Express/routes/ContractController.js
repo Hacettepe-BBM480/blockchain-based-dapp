@@ -1,8 +1,12 @@
 const router = require("express").Router();
 const verify = require("./verifyLogin");
+const fs = require("fs");
+
+const ipfsClient = require('ipfs-http-client');
+const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' });
 
 const { studentValidation ,updateStudentValidation} = require("./validation/ContractValidation");
-const { addStudent,deleteStudent,getStudent,updateStudent } = require("../services/ContractService");
+const { addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile } = require("../services/ContractService");
 
 router.post("/addStudent", verify, (req, res) => {
   //Validation part
@@ -31,7 +35,7 @@ router.delete("/deleteStudent", verify, (req, res) => {
 
 });
 
-router.post("/getStudent", verify,async (req, res) => {
+router.post("/getStudent",async (req, res) => {
 
   let { error } = studentValidation(req.body);
   if (error) return res.status(400).send(error);
@@ -54,6 +58,27 @@ router.put("/updateStudent", verify,async (req, res) => {
   if (error) return res.status(404).send(error);
 
   res.status(200).send();
+});
+
+router.post("/uploadFile",async(req,res)=>{
+
+  const buffer =fs.readFileSync('/home/msk/Downloads/Project/Express/routes/Dd.docx');
+  const {_name, description, studentId } = req.body;
+  
+  const addedfile = await ipfs.add(buffer);
+  error = await uploadFile(addedfile,_name, description, studentId);
+  
+  if (error) return res.status(404).send(error);
+
+  res.status(200).send();
+
+});
+
+router.post('/getFile', async (req, res) => {
+  
+  const { studentNo } = req.body;
+  let file = await getFile(studentNo);
+  res.status(200).send(file);
 });
 
 module.exports = router;
