@@ -11,6 +11,7 @@
 ReactJS-Client <br/>
 ExpressJS-Rest Api <br/>
 IPFS-File Storage <br/>
+MongoDB- NoSQL Database
 Web3-Ethereum Provider <br/>
 Truffle-Smart Contract Migration <br/>
 Solidity-Smart Contract <br/>
