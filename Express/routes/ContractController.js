@@ -62,12 +62,12 @@ router.put("/updateStudent", verify,async (req, res) => {
 
 router.post("/uploadFile",async(req,res)=>{
 
-  const buffer =fs.readFileSync('/home/msk/Downloads/Project/Express/routes/Dd.docx');
-  const {_name, description, studentId } = req.body;
-  
-  const addedfile = await ipfs.add(buffer);
-  error = await uploadFile(addedfile,_name, description, studentId);
-  
+  const {name, description, studentId,buffer,extension } = req.body;
+  let buff = new Buffer(buffer, 'base64');
+
+  const addedfile = await ipfs.add(buff);
+  error = await uploadFile(addedfile,name, description, studentId,extension);
+
   if (error) return res.status(404).send(error);
 
   res.status(200).send();

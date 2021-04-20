@@ -42,11 +42,11 @@ const getStudent = async (studentNo) => {
 }
 
 
-const uploadFile = async(addedfile,_name, description, studentId)=>{
+const uploadFile = async(addedfile,_name, description, studentId,extension)=>{
 
   ContractFactory.getInstance()
         .then(async (contract) => {
-            await contract.methods.uploadFile(uniquid(), addedfile[0].hash, addedfile[0].size,'docx',_name,description,studentId).send({ from: OwnerPublicKey });
+            await contract.methods.uploadFile(uniquid(), addedfile[0].hash, addedfile[0].size,extension,_name,description,studentId).send({ from: OwnerPublicKey });
         })
         .catch((error) => {
             return error;

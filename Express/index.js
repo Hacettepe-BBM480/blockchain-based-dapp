@@ -7,13 +7,12 @@ var cors = require('cors')
 
 app.use(cors())
 
-
-
 //Import Routes
 const authRoute = require("./routes/AuthController");
 const contractRoute = require("./routes/ContractController");
 
-const jsonParser = bodyParser.json()
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 
 dotenv.config();
@@ -26,7 +25,7 @@ mongoose.connect(
 );
 
 //Route Middlewares
-app.use("/api/user",jsonParser,authRoute);
-app.use("/api/web3",jsonParser,contractRoute);
+app.use("/api/user",authRoute);
+app.use("/api/web3",contractRoute);
 
 app.listen(3000 , () => console.log("Server Up and running"));

@@ -12,7 +12,7 @@ const login = async (email,password) => {
 
     //Create and assign a token
     const token = jwt.sign(
-      { _id: userDB._id, email: userDB.email },
+      { _id: userDB._id, email: userDB.email,role:"ROLE_ADMIN" },
       process.env.TOKEN_SECRET
     );
     return token;

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
-import Student from "./Student";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AdminPage from "./AdminPage";
+import RegisterLoginPage from "./RegisterLoginPage";
 
 export default class App extends Component {
   constructor(props) {
@@ -17,38 +16,23 @@ export default class App extends Component {
     };
   }
 
-  // captureFile = (event) => {
-  //   event.preventDefault();
-
-  //   // Process file for IPFS. File convert to Buffer
-  //   const file = event.target.files[0];
-  //   const reader = new window.FileReader(); // file'ı buffer arraya çevirmek için kullanılır. FileReader, Buffer array araçlarını sağlar.
-  //   reader.readAsArrayBuffer(file);
-  //   reader.onloadend = () => {
-  //     this.setState({ buffer: Buffer(reader.result) }); // ipfs'e eklenecek data
-  //     console.log("buffer: ", Buffer(reader.result));
-  //   };
-  // };
-
   render() {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = localStorage.getItem("token");
+    if (user != null && token != null && user.role === "ROLE_ADMIN")
+      return <AdminPage />;
+    let background = "https://kaosgl.org/resim/Egitim/Hacettepe1.jpg";
     return (
-      <div className="container mt-5">
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path="/student/:studentNo"
-              component={Student}
-            ></Route>
-            <Route
-              path="/"
-              render={(props) => {
-                return <h1>HOME</h1>;
-              }}
-            ></Route>
-          </Switch>
-        </Router>
-      </div>
+        <div style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          height:"100vh"
+        }}>
+          <div className="container">
+            <RegisterLoginPage />
+          </div>
+        </div>
+
     );
   }
 }

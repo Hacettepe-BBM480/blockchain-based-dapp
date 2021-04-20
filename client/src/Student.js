@@ -5,6 +5,7 @@ import FileList from "./FileList";
 
 import axios from "axios";
 
+
 export default class Student extends Component {
   constructor(props) {
     super(props);
@@ -20,15 +21,19 @@ export default class Student extends Component {
   }
 
   componentDidMount = async () => {
+    this.getFiles();
+  };
+
+  getFiles = async () => {
     const { studentNo } = this.props.match.params;
     const studentResponse = await axios.post(
-      "http://localhost:3000/api/web3/getStudent",
-      { studentNo }
+        "http://localhost:3000/api/web3/getStudent",
+        { studentNo }
     );
     const { 0: id, 1: no } = studentResponse.data;
     const response = await axios.post(
-      "http://localhost:3000/api/web3/getFile",
-      { studentNo }
+        "http://localhost:3000/api/web3/getFile",
+        { studentNo }
     );
     const { data } = response;
     this.setState({
@@ -36,16 +41,21 @@ export default class Student extends Component {
       id,
       no,
     });
-  };
+  }
 
   render() {
     const { id, no } = this.state;
     return (
-      <div>
-        <StudentHeader id={id} no={no} />
-        <hr />
-        <FileList data={this.state.data} />
-      </div>
+        <div style={{ }}>
+          <div className="container" >
+            <div className={"pt-5"}>
+              <StudentHeader getFiles={this.getFiles} id={id} no={no} />
+              <hr />
+              <FileList data={this.state.data} />
+            </div>
+
+          </div>
+        </div>
     );
   }
 }
