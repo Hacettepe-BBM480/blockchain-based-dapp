@@ -7,7 +7,7 @@
 6.Personel bilgileri MongoDB Cloud da tutuldu. <br/>
 8.React ile Login + Admin Paneli oluşturuldu. ( Student Page / Student Upload File ) <br/>
 9.Student Listeleme yapılacak. <br/>
-10.Student Add Delete Update yapılacak.
+10.Student Add Delete Update yapılacak. <br/>
 11.Personel register yapılacak.<br/>
 
 # Kullanılan Teknolojiler 
@@ -17,6 +17,7 @@ IPFS-File Storage <br/>
 MongoDB- NoSQL Database <br/>
 Web3-Ethereum Provider <br/>
 Truffle-Smart Contract Migration <br/>
+Ganache-Local Ethereum Network <br/>
 Solidity-Smart Contract <br/>
 
 
