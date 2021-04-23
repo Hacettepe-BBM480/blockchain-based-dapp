@@ -6,9 +6,10 @@
 5.Authentication işlemi için JWT kullanıldı. <br/>
 6.Personel bilgileri MongoDB Cloud da tutuldu. <br/>
 8.React ile Login + Admin Paneli oluşturuldu. ( Student Page / Student Upload File ) <br/>
-9.Student Listeleme yapılacak. <br/>
-10.Student Add Delete Update yapılacak. <br/>
-11.Personel register yapılacak.<br/>
+9.Student Listeleme yapıldı. <br/>
+10.Personel listeleme yapıldı <br/>
+11.Student Add Delete Update yapılacak. <br/>
+12.Personel Register Delete Update yapılacak.<br/>
 
 # Kullanılan Teknolojiler 
 ReactJS-Client <br/>
