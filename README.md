@@ -8,8 +8,10 @@
 8.React ile Login + Admin Paneli oluşturuldu. ( Student Page / Student Upload File ) <br/>
 9.Student Listeleme yapıldı. <br/>
 10.Personel listeleme yapıldı <br/>
-11.Student Add Delete Update yapılacak. <br/>
-12.Personel Register Delete Update yapılacak.<br/>
+11.Student Add Delete yapıldı. <br/>
+12.Personel Register Delete yapıldı.<br/>
+13.Persone Update yapılacak. <br/>
+14.Student Add yapılacak <br/>
 
 # Kullanılan Teknolojiler 
 ReactJS-Client <br/>
