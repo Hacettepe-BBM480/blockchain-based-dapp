@@ -1,11 +1,15 @@
 # Yapılacaklar 
-1.Akıllı Kontrat Yazmak <br/>
-2.Akıllı Kontrat ı Ganache a Migrate etmek <br/>
-3.Express.js ile REST API Endpointleri oluşturmak (Usecaseler için) <br/>
-4.Endpoint lerde Web3 ile kontrat fonksiyonlarını çağır. <br/>
-5.Personel bilgileri MongoDB Cloud da tutuldu. <br/>
-6.Verification işlemleri için JWT kullanıldı. <br/>
-7.React ile Login + Admin Paneli oluşturuldu. ( Student Listeleme / Student Page / Student Upload File ) <br/>
+1.Akıllı Kontrat Yazıldı <br/>
+2.Akıllı Kontrat Ganache a Migrate edildi <br/>
+3.Express.js ile REST API Endpointleri oluşturuldu. (Usecaseler için) <br/>
+4.Endpoint lerde Web3 ile kontrat fonksiyonlarını çağırıldı. <br/>
+5.Authentication işlemi için JWT kullanıldı. <br/>
+6.Personel bilgileri MongoDB Cloud da tutuldu. <br/>
+8.React ile Login + Admin Paneli oluşturuldu. ( Student Page / Student Upload File ) <br/>
+9.Student Listeleme yapıldı. <br/>
+10.Personel listeleme yapıldı <br/>
+11.Student Add Delete Update yapılacak. <br/>
+12.Personel Register Delete Update yapılacak.<br/>
 
 # Kullanılan Teknolojiler 
 ReactJS-Client <br/>
@@ -14,6 +18,7 @@ IPFS-File Storage <br/>
 MongoDB- NoSQL Database <br/>
 Web3-Ethereum Provider <br/>
 Truffle-Smart Contract Migration <br/>
+Ganache-Local Ethereum Network <br/>
 Solidity-Smart Contract <br/>
 
 
