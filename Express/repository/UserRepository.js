@@ -1,4 +1,6 @@
 const User = require("./model/User");
+var mongodb = require("mongodb");
+
 
 const saveUser = async (name,surname,email,digest) => {
   const user = new User({
@@ -22,7 +24,11 @@ const findAll = async () => {
 };
 
 const deleteById = async (id) => {
-  await User.findByIdAndDelete(id);
+  try{
+    await User.deleteOne({_id: new mongodb.ObjectID(id)});
+  }catch (error){
+    console.log("fail")
+  }
 };
  
 

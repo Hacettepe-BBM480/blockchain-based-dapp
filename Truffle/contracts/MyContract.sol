@@ -32,7 +32,7 @@ contract MyContract {
         string studentId;
     }
 
-    string[] private studentIds;
+    string[] public studentIds;
 
     uint256 private studentCount;
     mapping(string => Student) private students;
@@ -75,12 +75,21 @@ contract MyContract {
         emit addStudentEvent(_id, _studentNo);
     }
 
-    function deleteStudent(string memory _studentNo,uint assetIndex) public onlyOwner {
+    function deleteStudent(string memory _studentNo) public onlyOwner {
         string memory _id = studentsNoToId[_studentNo];
+        require((keccak256(abi.encodePacked((_id))) != keccak256(abi.encodePacked(("")))),"There is no student.");
+        string[] memory tempList = new string[](studentIds.length-1);
+        uint count = 0;
+        for(uint i=0 ; i<studentIds.length ; i++){
+            if((keccak256(abi.encodePacked((_id))) != keccak256(abi.encodePacked((studentIds[i]))))){
+                tempList[count] = studentIds[i] ;
+                count++;
+            }
+        }
+        studentIds = tempList;
+        studentCount--;
         delete studentsNoToId[_studentNo];
         delete students[_id];
-        studentCount--;
-        delete studentIds[assetIndex];
         emit deleteStudentEvent(_id, _studentNo);
     }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 
 class PanelStudent extends Component {
 
@@ -31,8 +32,8 @@ class PanelStudent extends Component {
 
 
     onDelete = () => {
-        const {onDelete,index} = this.props;
-        onDelete(this.state.studentNo,index);
+        const {onDelete} = this.props;
+        onDelete(this.state.studentNo);
     }
 
     onUpdate = () => {
@@ -41,30 +42,36 @@ class PanelStudent extends Component {
         onUpdate(studentNo,studentId);
     }
 
+
+
     render() {
         const {
             studentNo,studentId
         } = this.state
+        const {index} = this.props;
         return (
-            <div className="row g-0">
-                <div className="mb-3 col-1">
-                                            <span className="input-group-text"
-                                            ><Link to={"/student/"+studentNo} >{studentId}</Link></span>
-                </div>
-                <div className="mb-3 col-4 offset-4">
-                    <input type="text" className="form-control" name="studentNo" onChange={this.onChange} value={studentNo}/>
-                </div>
-                <div className="col-2 offset-1">
-                    <button
-                        className="btn btn-dark" onClick={this.onDelete} >
-                        <ArrowRightIcon fontSize={"small"}/>
-                    </button>
-                    <button
-                        className="btn btn-dark" onClick={this.onUpdate} >
-                        <ArrowRightIcon fontSize={"small"}/>
-                    </button>
-                </div>
-            </div>
+            <tr>
+                <th scope="row">{index+1}</th>
+                <td><Link to={"/student/"+studentNo} >{studentId}</Link></td>
+                <td><input type="text" style={{width:"50%"}} className="form-control" name="studentNo" onChange={this.onChange} value={studentNo}/></td>
+                <td >
+                    <div className={"d-flex justify-content-around"}>
+                        <button
+                            onClick={this.onDelete} style={{
+                            border:"none"
+                        }}>
+                            <DeleteForeverIcon />
+                        </button>
+                        <button
+                            onClick={this.onUpdate} style={{
+                            border:"none"
+                        }}>
+                            <SystemUpdateAltIcon />
+                        </button>
+                    </div>
+
+                </td>
+            </tr>
         );
     }
 }

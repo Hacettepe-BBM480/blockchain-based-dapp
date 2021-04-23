@@ -5,7 +5,7 @@ const fs = require("fs");
 const ipfsClient = require('ipfs-http-client');
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' });
 
-const { studentValidation ,updateStudentValidation} = require("./validation/ContractValidation");
+const { studentValidation ,updateStudentValidation,deleteStudentValidation} = require("./validation/ContractValidation");
 const { addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile,getAllStudent } = require("../services/ContractService");
 
 router.post("/addStudent", verify, (req, res) => {
@@ -23,35 +23,38 @@ router.post("/addStudent", verify, (req, res) => {
 
 router.delete("/deleteStudent", verify, (req, res) => {
 
-  let { error } = studentValidation(req.body);
+  let { error } = deleteStudentValidation(req.body);
   if (error) return res.status(400).send(error);
 
-  const { studentNo,index } = req.body;
+  const { studentNo } = req.body;
 
-  error = deleteStudent(studentNo,index);
+  error = deleteStudent(studentNo);
   if (error) return res.status(404).send(error);
 
   res.status(200).send();
 
 });
 
-router.get('/getAllStudent', async(req, res) => {
+router.get('/getAllStudent', verify, async(req, res) => {
   try{
      let students = await getAllStudent();
-     students = students.map(studentArray => {
+     let data = [];
+     students.forEach(studentArray => {
        const [studentId,studentNo] = studentArray;
-       return {
-         studentId,
-         studentNo
+       if(studentId.trim() !== "" && studentNo.trim() !== ""){
+         data.push({
+           studentId,
+           studentNo
+         });
        }
      })
-     res.status(200).json(students);
+     res.status(200).json(data);
   }catch(error){
      res.status(400).send(error.message);
   }
 })
 
-router.post("/getStudent",async (req, res) => {
+router.post("/getStudent", verify, async (req, res) => {
 
   let { error } = studentValidation(req.body);
   if (error) return res.status(400).send(error);
@@ -76,7 +79,7 @@ router.put("/updateStudent", verify,async (req, res) => {
   res.status(200).send();
 });
 
-router.post("/uploadFile",async(req,res)=>{
+router.post("/uploadFile", verify, async(req,res)=>{
 
   const {name, description, studentId,buffer,extension } = req.body;
   let buff = new Buffer(buffer, 'base64');
@@ -90,7 +93,7 @@ router.post("/uploadFile",async(req,res)=>{
 
 });
 
-router.post('/getFile', async (req, res) => {
+router.post('/getFile', verify, async (req, res) => {
   
   const { studentNo } = req.body;
   let file = await getFile(studentNo);

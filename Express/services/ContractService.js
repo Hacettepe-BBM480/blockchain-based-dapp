@@ -14,10 +14,10 @@ const addStudent  = (studentNo) => {
     });
 }
 
-const deleteStudent = (studentNo,index) => {
+const deleteStudent = (studentNo) => {
   ContractFactory.getInstance()
     .then(async (contract) => {
-      await contract.methods.deleteStudent(studentNo,index).send({ from: OwnerPublicKey })
+        await contract.methods.deleteStudent(studentNo).send({ from: OwnerPublicKey })
     })
     .catch((error) => {
       return error;

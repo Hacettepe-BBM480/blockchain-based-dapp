@@ -1,52 +1,274 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import {Card} from "react-bootstrap";
+import {Button, Card, Modal} from "react-bootstrap";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import PanelPersonel from "./PanelPersonel";
+import AddIcon from "@material-ui/icons/Add";
+import swal from "sweetalert";
 
 export default class Personel extends Component {
 
     constructor() {
         super();
         this.state = {
-            personels : []
+            name : "",
+            surname : "",
+            email : "",
+            password : "",
+            personels : [],
+            show:false,
+            errors:{},
+            pendingApiCall:false
         }
     }
 
-    componentDidMount =  async () =>  {
-        const personels = await this.getAllPersonel();
+    clearAllParameters = () => {
         this.setState({
-            personels
+            name:"",
+            surname:"",
+            email:"",
+            password:""
         })
     }
-    //DELETE UPDATE REGISTER
-    //DELETE UPDATE
+
+    componentDidMount = () =>  {
+        this.getAllPersonel();
+    }
+
     getAllPersonel = async () => {
         axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
         const personelResponse = await axios.get(
             "http://localhost:3000/api/personel/getAll",
         );
-        return personelResponse.data;
+        this.setState({
+            personels:personelResponse.data
+        })
     }
 
     onDelete = async (id) => {
-        //REST API REQUEST FOR DELETE
-        //this.setState({
-        //  personels : this.getAllPersonel();
-        // })
-        console.log(id);
+        const body = {
+            id
+        }
+        try{
+            const token =  await localStorage.getItem("token");
+            await axios.delete("http://localhost:3000/api/personel/delete", {
+                headers: {
+                    "auth-token": token
+                },
+                data: {
+                    ...body
+                }
+            });
+            swal({
+                title: "Successfully deleted.",
+                icon: "success",
+                timer: 1500,
+            }).then((isClicked) => {
+                window.location.reload();
+            });
+        }catch (error){
+            swal({
+                title: "Warning!",
+                text: "Something went wrong.",
+                icon: "warning",
+                dangerMode: true,
+            });
+        }
     }
 
-    onUpdate = async () => {
-
+    onUpdate = async (id,name,surname,email,password) => {
+        // const body = {
+        //     id,
+        //     name,
+        //     surname,
+        //     email,
+        //     password
+        // }
+        // try{
+        //     const token =  await localStorage.getItem("token");
+        //     await axios.delete("http://localhost:3000/api/personel/delete", {
+        //         headers: {
+        //             "auth-token": token
+        //         },
+        //         data: {
+        //             ...body
+        //         }
+        //     });
+        //     swal({
+        //         title: "Successfully deleted.",
+        //         icon: "success",
+        //         timer: 1500,
+        //     }).then((isClicked) => {
+        //         window.location.reload();
+        //     });
+        // }catch (error){
+        //     swal({
+        //         title: "Warning!",
+        //         text: "Something went wrong.",
+        //         icon: "warning",
+        //         dangerMode: true,
+        //     });
+        // }
     }
+
+    register = async () => {
+        const {name,surname,email,password} = this.state;
+        const body = {
+            name,
+            surname,
+            email,
+            password
+        }
+        try{
+            this.setState({pendingApiCall:true});
+            axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
+            await axios.post("http://localhost:3000/api/user/register", body);
+            swal({
+                title: "Successfully personel added.",
+                icon: "success",
+                timer: 1500,
+            }).then(async (isClicked) => {
+                await this.getAllPersonel();
+                this.handleClose();
+            });
+        }catch (error){
+            swal({
+                title: "Warning!",
+                text: "Something went wrong.",
+                icon: "warning",
+                dangerMode: true,
+            });
+        }
+        this.setState({pendingApiCall:false});
+    }
+
+    handleClose = () => {
+        this.setState({show:false});
+        this.clearAllParameters();
+    }
+
+    handleShow = () => {
+        this.setState({show:true});
+    }
+
+    onChange = (e) => {
+        const {name,value} = e.target;
+        const errors = {...this.state.errors};
+        value.trim() === "" ? errors[name] = "must be filled." : errors[name] = undefined;
+        this.setState({
+            [name] : value,
+            errors
+        })
+    }
+
+
+    errorJSXClassName = (error) => {
+        const className = error
+            ? "form-control is-invalid shadow p-2 mb-3"
+            : "form-control shadow p-2  mb-3";
+        return className;
+    }
+
 
     render() {
-        const {personels} = this.state;
+        const {personels,errors} = this.state;
+        const {email,password,name,surname} = errors;
         return (
             <div className={"container mt-5 d-flex flex-column"} >
                 <Card style={{ fontSize:"20px" }}>
-                    <Card.Header><AssignmentIndIcon /> Personel List</Card.Header>
+                    <Card.Header>
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                <AssignmentIndIcon /> Personel List
+                            </div>
+                            <Button variant="primary" onClick={this.handleShow}>
+                                <AddIcon/>
+                                Add Personel
+                            </Button>
+
+                            <Modal show={this.state.show} backdrop="static" centered onHide={this.handleClose}>
+                                <Modal.Header >
+                                    <Modal.Title>Personel Register</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div className="mb-3 row">
+                                        <label
+                                            className="col-sm-3 col-form-label"
+                                        >
+                                            Name
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <input
+                                                type="text"
+                                                name={"name"}
+                                                onChange={this.onChange}
+                                                className={this.errorJSXClassName(name)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mb-3 row">
+                                        <label
+                                            className="col-sm-3 col-form-label"
+                                        >
+                                            Surname
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <input
+                                                type="text"
+                                                name={"surname"}
+                                                onChange={this.onChange}
+                                                className={this.errorJSXClassName(surname)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mb-3 row">
+                                        <label
+                                            className="col-sm-3 col-form-label"
+                                        >
+                                            Email
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <input
+                                                type="email"
+                                                name={"email"}
+                                                onChange={this.onChange}
+                                                className={this.errorJSXClassName(email)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mb-3 row">
+                                        <label
+                                            className="col-sm-3 col-form-label"
+                                        >
+                                            Password
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <input
+                                                type="password"
+                                                name={"password"}
+                                                onChange={this.onChange}
+                                                className={this.errorJSXClassName(password)}
+                                            />
+                                        </div>
+                                    </div>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={this.handleClose}>
+                                        Close
+                                    </Button>
+                                    <Button variant="danger"
+                                            onClick={this.register}
+                                            disabled={this.state.pendingApiCall}
+                                    >
+                                        {this.state.pendingApiCall && (
+                                            <span className="spinner-border spinner-border-sm"></span>
+                                        )}
+                                        Register
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </div>
+                    </Card.Header>
                     <Card.Body>
                         <div className="row mb-3">
                             <div
@@ -58,7 +280,7 @@ export default class Personel extends Component {
                                 Email
                             </div>
                             <div
-                                className="col-3">
+                                className="col-2">
                                 Name
                             </div>
                             <div
@@ -68,9 +290,13 @@ export default class Personel extends Component {
                         </div>
                         <hr/>
                         {personels.map(({_id,email,name,surname},index) => {
-                            return (
-                                <PanelPersonel key={index} onDelete={this.onDelete} onUpdate={this.onUpdate} personelId={_id} email={email} name={name} surname={surname}/>
-                            );
+                             if(JSON.parse(localStorage.getItem("user"))["_id"] !== _id){
+                                 return (
+                                     <PanelPersonel key={index} onDelete={this.onDelete} onUpdate={this.onUpdate} personelId={_id} email={email} name={name} surname={surname}/>
+                                 );
+                             }
+                             return <div key={index}></div>
+
                         })}
                     </Card.Body>
                 </Card>

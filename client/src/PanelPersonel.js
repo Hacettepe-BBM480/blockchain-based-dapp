@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 
 class PanelPersonel extends Component {
 
@@ -33,27 +35,34 @@ class PanelPersonel extends Component {
         onDelete(this.props.personelId);
     }
 
+    onUpdate = () => {
+        const {onUpdate} = this.props;
+        const {name,surname,email,password} = this.state;
+        onUpdate(name,surname,email,password);
+    }
+
     render() {
         const {personelId} = this.props;
         const {email,name,surname} = this.state;
         return (
-            <div className="row">
+            <div className=" d-flex g-0">
                 <div className="mb-3 col-3">
-                                            <span className="input-group-text"
-                                            ><Link to={"/personel/"+personelId} >{personelId}</Link></span>
+                        <span className="input-group-text"
+                        ><Link to={"/personel/"+personelId} >{personelId}</Link></span>
                 </div>
-                <div className="mb-3 col-3">
+                <div className="mb-3 col-3 mr-3">
                     <input type="text" className="form-control" name="email" onChange={this.onChange} value={email}/>
                 </div>
-                <div className="mb-3 col-3">
+                <div className="mb-3 col-2">
                     <input type="text" className="form-control" name="name" onChange={this.onChange} value={name}/>
                 </div>
-                <div className="mb-3 col-3">
+                <div className="mb-3 col-2">
                     <input type="text" className="form-control" name="surname" onChange={this.onChange} value={surname}/>
                 </div>
-                <button onClick={this.onDelete}>
-                    DELETE
-                </button>
+                <div className={"row flex-grow-1"} style={{textAlign:"center"}}>
+                    <button type="button" className={"btn col-3 offset-3 btn-sm pb-3"} onClick={this.onDelete}><DeleteForeverIcon  /></button>
+                    <button type="button" className={"btn col-3  btn-sm pb-3"} onClick={this.onUpdate}> <SystemUpdateAltIcon /></button>
+                </div>
             </div>
         );
     }

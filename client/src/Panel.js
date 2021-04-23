@@ -25,14 +25,20 @@ class Panel extends Component{
         })
     }
 
-    onDelete = async (studentNo,index) => {
+    onDelete = async (studentNo) => {
         const body = {
-            studentNo,
-            index
+            studentNo
         }
         try{
-            axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
-            await axios.delete("http://localhost:3000/api/web3/deleteStudent",body)
+            const token =  await localStorage.getItem("token");
+            await axios.delete("http://localhost:3000/api/web3/deleteStudent", {
+                headers: {
+                    "auth-token": token
+                },
+                data: {
+                    ...body
+                }
+            });
             swal({
                 title: "Successfully deleted.",
                 icon: "success",
@@ -60,7 +66,7 @@ class Panel extends Component{
         }
         try{
             axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
-            // await axios.delete("http://localhost:3000/api/web3/updateStudent",body)
+            await axios.put("http://localhost:3000/api/web3/updateStudent",body)
             swal({
                 title: "Successfully updated.",
                 icon: "success",
@@ -87,22 +93,23 @@ class Panel extends Component{
                 <Card style={{ fontSize:"20px" }}>
                     <Card.Header><AssignmentIndIcon /> Student List</Card.Header>
                     <Card.Body>
-                        <div className="row g-0 mb-3">
-                            <div
-                                className="col-5">
-                                Student Id
-                            </div>
-                            <div
-                                className="col-5">
-                                Student No
-                            </div>
-                        </div>
-                        <hr/>
-                        {studentList.map(({studentId,studentNo},index) => {
-                            return (
-                                <PanelStudent key={index} index={index} onDelete={this.onDelete} onUpdate={this.onUpdate} studentId={studentId} studentNo={studentNo}/>
-                            );
-                        })}
+                        <table className="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Student Id</th>
+                                <th scope="col">Student No</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {studentList.map(({studentId,studentNo},index) => {
+                                    return (
+                                        <PanelStudent key={index} index={index} onDelete={this.onDelete} onUpdate={this.onUpdate} studentId={studentId} studentNo={studentNo}/>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     </Card.Body>
                 </Card>
             </div>
