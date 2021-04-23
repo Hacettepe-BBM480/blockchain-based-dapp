@@ -14,10 +14,10 @@ const addStudent  = (studentNo) => {
     });
 }
 
-const deleteStudent = (studentNo) => {
+const deleteStudent = (studentNo,index) => {
   ContractFactory.getInstance()
     .then(async (contract) => {
-      await contract.methods.deleteStudent(studentNo).send({ from: OwnerPublicKey })
+      await contract.methods.deleteStudent(studentNo,index).send({ from: OwnerPublicKey })
     })
     .catch((error) => {
       return error;
@@ -41,11 +41,15 @@ const getStudent = async (studentNo) => {
     return data;
 }
 
+const getAllStudent = async () => {
+    let contract = await ContractFactory.getInstance();
+    let data = await contract.methods.getAllStudent().call();
+    return data;
+}
 
 const uploadFile = async(addedfile,_name, description, studentId,extension)=>{
 
-  ContractFactory.getInstance()
-        .then(async (contract) => {
+  ContractFactory.getInstance().then(async (contract) => {
             await contract.methods.uploadFile(uniquid(), addedfile[0].hash, addedfile[0].size,extension,_name,description,studentId).send({ from: OwnerPublicKey });
         })
         .catch((error) => {
@@ -59,4 +63,4 @@ const getFile = async(studentNo)=>{
   return data;
 }
 
-module.exports = {addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile}
+module.exports = {addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile,getAllStudent}

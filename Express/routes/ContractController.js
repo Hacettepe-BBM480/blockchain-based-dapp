@@ -6,7 +6,7 @@ const ipfsClient = require('ipfs-http-client');
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' });
 
 const { studentValidation ,updateStudentValidation} = require("./validation/ContractValidation");
-const { addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile } = require("../services/ContractService");
+const { addStudent,deleteStudent,getStudent,updateStudent,getFile,uploadFile,getAllStudent } = require("../services/ContractService");
 
 router.post("/addStudent", verify, (req, res) => {
   //Validation part
@@ -26,14 +26,30 @@ router.delete("/deleteStudent", verify, (req, res) => {
   let { error } = studentValidation(req.body);
   if (error) return res.status(400).send(error);
 
-  const { studentNo } = req.body;
+  const { studentNo,index } = req.body;
 
-  error = deleteStudent(studentNo);
+  error = deleteStudent(studentNo,index);
   if (error) return res.status(404).send(error);
 
   res.status(200).send();
 
 });
+
+router.get('/getAllStudent', async(req, res) => {
+  try{
+     let students = await getAllStudent();
+     students = students.map(studentArray => {
+       const [studentId,studentNo] = studentArray;
+       return {
+         studentId,
+         studentNo
+       }
+     })
+     res.status(200).json(students);
+  }catch(error){
+     res.status(400).send(error.message);
+  }
+})
 
 router.post("/getStudent",async (req, res) => {
 

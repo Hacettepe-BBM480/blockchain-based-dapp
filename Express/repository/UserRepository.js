@@ -15,7 +15,16 @@ const findByEmail = async (email) => {
   const userDB = await User.findOne({ email });
   return userDB;
 };
+
+const findAll = async () => {
+  const users = await User.find();
+  return users;
+};
+
+const deleteById = async (id) => {
+  await User.findByIdAndDelete(id);
+};
  
 
 
-module.exports = { saveUser,findByEmail };
+module.exports = { saveUser,findByEmail,findAll,deleteById };

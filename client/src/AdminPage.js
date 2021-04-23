@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Student from "./Student";
+import Panel from "./Panel";
+import Personel from "./Personel";
+
 import {Button,Navbar} from "react-bootstrap";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import swal from "sweetalert";
+import {Link} from "react-router-dom";
 
 class AdminPage extends Component {
 
@@ -21,10 +25,9 @@ class AdminPage extends Component {
             }
         });
     };
-
     render() {
         return (
-            <div>
+            <Router>
                 <Navbar
                     style={{
                         position: "sticky",
@@ -33,11 +36,40 @@ class AdminPage extends Component {
                     }}
                     bg="dark"
                     variant="dark"
-                    className={"d-flex justify-content-between"}
+                    className={"d-flex"}
                 >
                     <Navbar.Brand className="m-3" href="/">
                         HACETTEPE UNIVERSITY
                     </Navbar.Brand>
+
+                    <Link  to={"/personel"}>
+                        <Button
+                            style={{
+                                backgroundColor: "darkgoldenrod",
+                                color: "whitesmoke",
+                                border: "0px",
+                                borderRadius: "10px",
+                                marginRight:"50px",
+                                marginLeft:"50px"
+                            }}
+                        >
+                            Personels
+                        </Button>
+                    </Link>
+                    <Link to={"/student"}>
+                        <Button
+                            style={{
+                                backgroundColor: "darkgoldenrod",
+                                color: "whitesmoke",
+                                border: "0px",
+                                borderRadius: "10px",
+                                marginRight:"50px"
+                            }}
+                        >
+                            Students
+                        </Button>
+                    </Link>
+
 
                     <Button
                         style={{
@@ -48,14 +80,21 @@ class AdminPage extends Component {
                             marginRight:"50px"
                         }}
                         onClick={this.logOut}
+                        className={"ms-auto"}
                     >
                         <ExitToAppIcon className="mr-1" />
                         Sign Out
                     </Button>
+
                 </Navbar>
 
-                <Router>
+
                     <Switch>
+                        <Route
+                            exact
+                            path="/personel"
+                            component={Personel}
+                        ></Route>
                         <Route
                             exact
                             path="/student/:studentNo"
@@ -63,13 +102,10 @@ class AdminPage extends Component {
                         ></Route>
                         <Route
                             path="/"
-                            render={(props) => {
-                                return <h1>HOME</h1>;
-                            }}
+                            component={Panel}
                         ></Route>
                     </Switch>
-                </Router>
-            </div>
+            </Router>
         );
     }
 }

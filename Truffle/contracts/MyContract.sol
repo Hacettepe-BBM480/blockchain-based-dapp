@@ -32,6 +32,8 @@ contract MyContract {
         string studentId;
     }
 
+    string[] private studentIds;
+
     uint256 private studentCount;
     mapping(string => Student) private students;
     mapping(string => string) private studentsNoToId;
@@ -57,32 +59,34 @@ contract MyContract {
         string memory _id = studentsNoToId[_studentNo];
         Student memory student = students[_id];
         return (_id,student.studentNo);
-        
+
     }
 
     function addStudent(string memory _id, string memory _studentNo)
-        public
-        onlyOwner
+    public
+    onlyOwner
     {
         Student storage newStudent = students[_id];
         studentsNoToId[_studentNo] = _id;
         studentCount++;
         newStudent.id = _id;
         newStudent.studentNo = _studentNo;
+        studentIds.push(_id);
         emit addStudentEvent(_id, _studentNo);
     }
 
-    function deleteStudent(string memory _studentNo) public onlyOwner {
+    function deleteStudent(string memory _studentNo,uint assetIndex) public onlyOwner {
         string memory _id = studentsNoToId[_studentNo];
         delete studentsNoToId[_studentNo];
         delete students[_id];
         studentCount--;
+        delete studentIds[assetIndex];
         emit deleteStudentEvent(_id, _studentNo);
     }
 
     function updateStudent(string memory _id, string memory _studentNo)
-        public
-        onlyOwner
+    public
+    onlyOwner
     {
         Student storage student = students[_id];
         delete studentsNoToId[student.studentNo];
@@ -145,12 +149,21 @@ contract MyContract {
     }
 
     function getFilesOfStudent(string memory studentNo)
-        public
-        view
-        returns (File[] memory)
+    public
+    view
+    returns (File[] memory)
     {
         string memory id = studentsNoToId[studentNo];
         Student storage student = students[id];
         return student.studentFiles;
+    }
+
+    function getAllStudent() public view onlyOwner returns (Student[] memory){
+        Student[] memory studentList = new Student[](studentCount);
+        for(uint i = 0; i<studentCount ; i++){
+            Student storage student = students[studentIds[i]];
+            studentList[i] = student;
+        }
+        return studentList;
     }
 }
