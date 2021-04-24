@@ -105,7 +105,7 @@ class Panel extends Component{
                             <tbody>
                                 {studentList.map(({studentId,studentNo},index) => {
                                     return (
-                                        <PanelStudent key={index} index={index} onDelete={this.onDelete} onUpdate={this.onUpdate} studentId={studentId} studentNo={studentNo}/>
+                                        <PanelStudent key={studentId} index={index} onDelete={this.onDelete} onUpdate={this.onUpdate} studentId={studentId} studentNo={studentNo}/>
                                     );
                                 })}
                             </tbody>

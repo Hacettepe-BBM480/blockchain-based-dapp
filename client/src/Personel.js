@@ -64,7 +64,7 @@ export default class Personel extends Component {
                 icon: "success",
                 timer: 1500,
             }).then((isClicked) => {
-                window.location.reload();
+                this.getAllPersonel();
             });
         }catch (error){
             swal({
@@ -292,7 +292,7 @@ export default class Personel extends Component {
                         {personels.map(({_id,email,name,surname},index) => {
                              if(JSON.parse(localStorage.getItem("user"))["_id"] !== _id){
                                  return (
-                                     <PanelPersonel key={index} onDelete={this.onDelete} onUpdate={this.onUpdate} personelId={_id} email={email} name={name} surname={surname}/>
+                                     <PanelPersonel key={_id} onDelete={this.onDelete} onUpdate={this.onUpdate} personelId={_id} email={email} name={name} surname={surname}/>
                                  );
                              }
                              return <div key={index}></div>
