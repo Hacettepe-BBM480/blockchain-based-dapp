@@ -10,8 +10,8 @@
 10.Personel listeleme yapıldı <br/>
 11.Student Add Delete yapıldı. <br/>
 12.Personel Register Delete yapıldı.<br/>
-13.Persone Update yapılacak. <br/>
-14.Student Add yapılacak <br/>
+13.Persone Update yapıldı. <br/>
+14.Student Add yapıldı <br/>
 
 # Kullanılan Teknolojiler 
 ReactJS-Client <br/>
