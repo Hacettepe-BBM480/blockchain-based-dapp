@@ -19,6 +19,7 @@ class Panel extends Component{
     }
 
     getAllStudent = async () => {
+        axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
         const response = await axios.get("http://localhost:3000/api/web3/getAllStudent");
         this.setState({
             studentList:response.data
