@@ -31,6 +31,12 @@ const deleteById = async (id) => {
   }
 };
  
+const updateById = async(id, updatedName,updatedSurname,updatedEmail,) => {
+  try{
+    await User.findByIdAndUpdate({_id:id}, {email : updatedEmail, name: updatedName, surname: updatedSurname});
+  } catch(error){
+    console.log(error.message);
+  }
+}
 
-
-module.exports = { saveUser,findByEmail,findAll,deleteById };
+module.exports = { saveUser,findByEmail,findAll,deleteById,updateById };

@@ -76,70 +76,85 @@ export default class Personel extends Component {
         }
     }
 
-    onUpdate = async (id,name,surname,email,password) => {
-        // const body = {
-        //     id,
-        //     name,
-        //     surname,
-        //     email,
-        //     password
-        // }
-        // try{
-        //     const token =  await localStorage.getItem("token");
-        //     await axios.delete("http://localhost:3000/api/personel/delete", {
-        //         headers: {
-        //             "auth-token": token
-        //         },
-        //         data: {
-        //             ...body
-        //         }
-        //     });
-        //     swal({
-        //         title: "Successfully deleted.",
-        //         icon: "success",
-        //         timer: 1500,
-        //     }).then((isClicked) => {
-        //         window.location.reload();
-        //     });
-        // }catch (error){
-        //     swal({
-        //         title: "Warning!",
-        //         text: "Something went wrong.",
-        //         icon: "warning",
-        //         dangerMode: true,
-        //     });
-        // }
+    onUpdate = async (id,name,surname,email) => {
+        if(name !== "" && surname !== "" && email !== "") {
+            const body = {
+                id,
+                name,
+                surname,
+                email
+            }
+            try{
+                axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
+                await axios.put("http://localhost:3000/api/personel/update",body);
+                swal({
+                    title: "Successfully updated.",
+                    icon: "success",
+                    timer: 1500,
+                }).then((isClicked) => {
+                    this.getAllPersonel();
+                });
+            }catch (error){
+                swal({
+                    title: "Warning!",
+                    text: "Something went wrong.",
+                    icon: "warning",
+                    dangerMode: true,
+                });
+            }
+        }else{
+            swal({
+                title: "Warning!",
+                text: "All blanks must be filled.",
+                icon: "warning",
+                dangerMode: true,
+            });
+        }
     }
 
     register = async () => {
-        const {name,surname,email,password} = this.state;
-        const body = {
-            name,
-            surname,
-            email,
-            password
-        }
-        try{
-            this.setState({pendingApiCall:true});
-            axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
-            await axios.post("http://localhost:3000/api/user/register", body);
-            swal({
-                title: "Successfully personel added.",
-                icon: "success",
-                timer: 1500,
-            }).then(async (isClicked) => {
-                await this.getAllPersonel();
-                this.handleClose();
-            });
-        }catch (error){
+        if(!this.isThereError()) {
+            const {name, surname, email, password} = this.state;
+            const body = {
+                name,
+                surname,
+                email,
+                password
+            }
+            try {
+                this.setState({pendingApiCall: true});
+                axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
+                await axios.post("http://localhost:3000/api/user/register", body);
+                swal({
+                    title: "Successfully personel added.",
+                    icon: "success",
+                    timer: 1500,
+                }).then(async (isClicked) => {
+                    await this.getAllPersonel();
+                    this.handleClose();
+                });
+            } catch (error) {
+                swal({
+                    title: "Warning!",
+                    text: "Something went wrong.",
+                    icon: "warning",
+                    dangerMode: true,
+                });
+            }
+        } else{
             swal({
                 title: "Warning!",
-                text: "Something went wrong.",
+                text: "All blanks must be filled.",
                 icon: "warning",
                 dangerMode: true,
             });
         }
         this.setState({pendingApiCall:false});
+    }
+
+    isThereError = () => {
+        const {name,surname,email,password} = this.state;
+        return name === "" || surname === "" || email === "" || password === "";
     }
 
     handleClose = () => {

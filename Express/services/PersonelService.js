@@ -1,5 +1,5 @@
 
-const { findAll,deleteById } = require("../repository/UserRepository");
+const { findAll,deleteById,updateById} = require("../repository/UserRepository");
 
 
 const getAllPersonel = async () => {
@@ -23,4 +23,12 @@ const deletePersonel = async (id) => {
     }
 };
 
-module.exports = {getAllPersonel,deletePersonel}
+const updatePersonel = async (id, updatedName,updatedSurname,updatedEmail) => {
+    try{
+        await updateById(id, updatedName, updatedSurname, updatedEmail);
+    }catch (error){
+        return error;
+    }
+};
+
+module.exports = {getAllPersonel,deletePersonel,updatePersonel}

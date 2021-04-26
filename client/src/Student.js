@@ -26,6 +26,7 @@ export default class Student extends Component {
 
   getFiles = async () => {
     const { studentNo } = this.props.match.params;
+    axios.defaults.headers.common["auth-token"] = await localStorage.getItem("token");
     const studentResponse = await axios.post(
         "http://localhost:3000/api/web3/getStudent",
         { studentNo }

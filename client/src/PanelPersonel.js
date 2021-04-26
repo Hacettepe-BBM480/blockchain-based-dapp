@@ -36,9 +36,9 @@ class PanelPersonel extends Component {
     }
 
     onUpdate = () => {
-        const {onUpdate} = this.props;
-        const {name,surname,email,password} = this.state;
-        onUpdate(name,surname,email,password);
+        const {onUpdate,personelId} = this.props;
+        const {name,surname,email} = this.state;
+        onUpdate(personelId,name,surname,email);
     }
 
     render() {
