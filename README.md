@@ -1,27 +1,26 @@
-# Yapılacaklar 
-1.Akıllı Kontrat Yazıldı <br/>
-2.Akıllı Kontrat Ganache a Migrate edildi <br/>
-3.Express.js ile REST API Endpointleri oluşturuldu. (Usecaseler için) <br/>
-4.Endpoint lerde Web3 ile kontrat fonksiyonlarını çağırıldı. <br/>
-5.Authentication işlemi için JWT kullanıldı. <br/>
-6.Personel bilgileri MongoDB Cloud da tutuldu. <br/>
-8.React ile Login + Admin Paneli oluşturuldu. ( Student Page / Student Upload File ) <br/>
-9.Student Listeleme yapıldı. <br/>
-10.Personel listeleme yapıldı <br/>
-11.Student Add Delete yapıldı. <br/>
-12.Personel Register Delete yapıldı.<br/>
-13.Persone Update yapıldı. <br/>
-14.Student Add yapıldı <br/>
-
-# Kullanılan Teknolojiler 
-ReactJS-Client <br/>
-ExpressJS-Rest Api <br/>
-IPFS-File Storage <br/>
-MongoDB- NoSQL Database <br/>
-Web3-Ethereum Provider <br/>
-Truffle-Smart Contract Migration <br/>
-Ganache-Local Ethereum Network <br/>
+# Technologies
 Solidity-Smart Contract <br/>
+IPFS-File Storage <br/>
+Ganache-Local Ethereum Network <br/>
+Truffle-Smart Contract Migration <br/>
+Web3-Ethereum Provider <br/>
+
+MongoDB- NoSQL Database <br/>
+ExpressJS-Rest Web Service <br/>
+ReactJS-Client <br/>
+
+# Usecases
+1. Personel Register/Login/Update/Delete/Listing <br/> 
+2. Student  Add/Update/Delete/Listing <br/> 
+3. File Upload <br/> 
+
+# Implementation Process
+1. Smart Contract was written. <br/>
+2. Smart Contract was migrated to Ganache Network by using Truffle framework <br/>
+3. Single Contract instance created by Web3.js on Rest Web Service <br/>
+4. Token based authentication created. <br/>
+5. Personel informations stored on MongoDB Cloud. <br/>
+6. Client application created with React.js <br/> 
 
 
 <img src="images/1.jpeg" />
